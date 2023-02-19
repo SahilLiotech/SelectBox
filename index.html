@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script>
+		var country = {
+			"India": {
+				"Gujarat": ["Ahemadabad","Surat","Vadodra","Rajkot","Junagadh"],
+				"Maharastra": ["Mumbai","Pune","Nagpur"],
+				"Uttarpradesh": ["Lukhnow","Kanpur","Mirzapur"]
+
+			},
+			"USA": {
+				"California":["Los Angeles","San Francisco","San Diego"],
+				"Texas": ["Houston","Austin","Dallas","El Paso"],
+				"Florida": ["Miami","Orlando","Tampa"]
+			},
+
+			"Pakistan":{
+				"Sindh":["Karachi","Ghotki","Larkana"],
+				"Punjab": ["Lahore","Bahawalpur","Hafizabad"]
+			}
+		}
+
+		window.onload = function() {
+
+			var countries = document.getElementById("Country");
+			var states = document.getElementById("State");
+			var cities = document.getElementById("City");
+			for (var val in country )
+			{
+				countries.options[countries.options.length] = new Option(val ,val);
+			}
+
+			countries.onchange = function() {
+
+                
+                states.length = 1;
+                cities.length = 1;
+
+				for (var val1 in country [this.value]){
+                   states.options[states.options.length]= new Option(val1,val1);
+				}		
+			}
+
+			states.onchange = function() {
+
+               cities.length = 1;
+
+			    var st= country[countries.value][this.value];
+
+                for (var i = 0; i < st.length; i++) {
+                	 cities.options[cities.options.length] = new Option(st[i],st[i]);
+
+                	 }
+
+			}
+		}
+	
+	</script>
+</head>
+<body>
+	<label>Country </label>
+	<select id="Country" name="Country">
+		<option selected="selected">Select The Country</option>
+	</select>
+
+	<label>State </label>
+	<select id="State" name="State">
+		<option selected="selected">Select The State</option>
+	</select>
+
+	<label>City </label>
+	<select id="City" name="City">
+		<option selected="selected">Select The City</option>			
+	</select>
+</body>
+</html>

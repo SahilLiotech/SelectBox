@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+	<script>
+		
+		var country = {
+    "India": {
+        "Gujarat": ["Ahemadabad","Surat","Vadodra","Rajkot","Junagadh"],
+        "Maharastra": ["Mumbai","Pune","Nagpur"],
+        "Uttarpradesh": ["Lukhnow","Kanpur","Mirzapur"]
+    },
+    "USA": {
+        "California": ["Los Angeles","San Francisco","San Diego"],
+        "Texas": ["Houston","Austin","Dallas","El Paso"],
+        "Florida": ["Miami","Orlando","Tampa"]
+    },
+    "Pakistan": {
+        "Sindh": ["Karachi","Ghotki","Larkana"],
+        "Punjab": ["Lahore","Bahawalpur","Hafizabad"]
+    }
+};
+
+$(document).ready(function() {
+    var countries = $("#Country");
+    var states = $("#State");
+    var cities = $("#City");
+
+    for (var val in country) {
+        countries.append(new Option(val, val));
+    }
+
+    countries.on("change", function() {
+        states.empty().append(new Option("Select The State", ""));
+        cities.empty().append(new Option("Select The City", ""));
+
+
+        for (var val1 in country[this.value]) {
+            states.append(new Option(val1, val1));
+        }
+    });
+
+    states.on("change", function() {
+        cities.empty().append(new Option("Select City", ""));
+
+        var st = country[countries.val()][$(this).val()];
+
+        for (var i = 0; i < st.length; i++) {
+            cities.append(new Option(st[i], st[i]));
+        }
+    });
+});
+	
+	</script>
+</head>
+<body>
+	<label>Country </label>
+	<select id="Country" name="Country">
+		<option selected="selected">Select The Country</option>
+	</select>
+
+	<label>State </label>
+	<select id="State" name="State">
+		<option selected="selected">Select The State</option>
+	</select>
+
+	<label>City </label>
+	<select id="City" name="City">
+		<option selected="selected">Select The City</option>			
+	</select>
+</body>
+</html>
